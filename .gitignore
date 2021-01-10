@@ -15,3 +15,5 @@ axiom.json
 images/axiom.json
 interact/includes/functions.sh
 selected.conf
+/docker/config/id_rsa*
+local-data/

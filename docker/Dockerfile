@@ -37,3 +37,4 @@ ENV AXIOM_PATH="/root/.axiom"
 RUN mkdir ${AXIOM_PATH}
 WORKDIR ${AXIOM_PATH}
 RUN echo "export PATH=\"\$PATH:${AXIOM_PATH}/interact\"" >>~/.bashrc
+RUN apt install -y bc

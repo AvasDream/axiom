@@ -1,0 +1,40 @@
+#!/bin/bash
+# Configurations made inside the docker container at runtime after building it
+# - Setup the account 
+# - generate ssh keys 
+# - build `full` image with packer.
+AXIOM_PATH="$HOME/.axiom"
+source "$AXIOM_PATH/interact/includes/vars.sh"
+cat << EOF
+
+ ▄▄▄      ▒██   ██▒ ██▓ ▒█████   ███▄ ▄███▓
+▒████▄    ▒▒ █ █ ▒░▓██▒▒██▒  ██▒▓██▒▀█▀ ██▒
+▒██  ▀█▄  ░░  █   ░▒██▒▒██░  ██▒▓██    ▓██░
+░██▄▄▄▄██  ░ █ █ ▒ ░██░▒██   ██░▒██    ▒██
+ ▓█   ▓██▒▒██▒ ▒██▒░██░░ ████▓▒░▒██▒   ░██▒
+ ▒▒   ▓▒█░▒▒ ░ ░▓ ░░▓  ░ ▒░▒░▒░ ░ ▒░   ░  ░
+  ▒   ▒▒ ░░░   ░▒ ░ ▒ ░  ░ ▒ ▒░ ░  ░      ░
+  ░   ▒    ░    ░   ▒ ░░ ░ ░ ▒  ░      ░
+      ░  ░ ░    ░   ░      ░ ░         ░
+
+The Dynamic Infrastructure Framework - @pry0cc
+Axiom initialization for the usage with docker. 
+- account setup: tested with do
+- SSH Keys
+EOF
+
+
+echo -e "${Blue}Configuring your cloud account...${Color_Off}"
+$AXIOM_PATH/interact/axiom-account-setup
+
+
+ssh-keygen -f "/root/.ssh/id_rsa" -N ""
+cat ~/.ssh/id_rsa.pub >$AXIOM_PATH/configs/authorized_keys
+
+
+
+
+echo -e "${BWhite}Beginning first packer build...${Color_Off}"
+cd $AXIOM_PATH/
+$AXIOM_PATH/interact/axiom-build
+cd
