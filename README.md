@@ -1,3 +1,11 @@
+## Notes avasdream
+
+`git clone $axiom_repo $inst_folder`
+`cd $inst_folder`
+`docker build . -t axiom`
+`docker run -it --rm -v "$(pwd):/root/.axiom" axiom bash`
+`axiom-docker-configure`
+
 <h1 align="center">
   <img src="screenshots/axiom-logo-new.png" alt="axio m" width="270px"></a>
   <br>
